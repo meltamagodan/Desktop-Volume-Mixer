@@ -1,4 +1,4 @@
-﻿using Microsoft.UI;
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -58,7 +58,7 @@ namespace DesktopVolumeMixer
             _appWindow = AppWindow.GetFromWindowId(windowId);
             SetWindowStyle();
             _appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 270, Height = 500 });
-
+            RestoreWindowBounds();
             _presenter = (OverlappedPresenter)_appWindow.Presenter;
             ConfigureWindowPresenter();
 
@@ -212,6 +212,38 @@ namespace DesktopVolumeMixer
                     Foreground = new SolidColorBrush(Colors.Red)
                 });
             }
+        }
+
+        private void SaveWindowBounds()
+        {
+            var presenter = _appWindow.Presenter as OverlappedPresenter;
+            if (presenter == null) return;
+
+            var bounds = _appWindow.Position;
+            var size = _appWindow.Size;
+
+            var settings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            settings.Values["WindowX"] = bounds.X;
+            settings.Values["WindowY"] = bounds.Y;
+        }
+
+        private void RestoreWindowBounds()
+        {
+            var settings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            if (settings.Values.TryGetValue("WindowX", out var xObj) &&
+                settings.Values.TryGetValue("WindowY", out var yObj))
+            {
+                int x = (int)xObj;
+                int y = (int)yObj;
+                
+                _appWindow.Move(new Windows.Graphics.PointInt32 { X = x, Y = y });
+            }
+        }
+
+        private void Window_Closed(object sender, WindowEventArgs args)
+        {
+            SaveWindowBounds();
         }
     }
 }
