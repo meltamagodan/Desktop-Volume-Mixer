@@ -1,4 +1,4 @@
-# Desktop Volume Mixer
+# Desktop Volume Mixer (formally known as Desktop Volumater) 
 
 **A lightweight WinUI 3 app that stays pinned to your desktop, giving you fast access to control individual app volumes.**
 
