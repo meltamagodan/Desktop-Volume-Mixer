@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DesktopVolumeMixer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DesktopVolumeMixer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
