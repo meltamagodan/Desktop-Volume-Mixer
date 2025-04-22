@@ -2,7 +2,7 @@
 
 **A lightweight WinUI 3 app that stays pinned to your desktop, giving you fast access to control individual app volumes.**
 
-![screenshot-placeholder](Assets/Wide310x150Logo.scale-200.png)
+![screenshot-placeholder](app.png)
 
 ## Features
 
